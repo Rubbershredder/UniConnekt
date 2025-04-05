@@ -1,3 +1,4 @@
+import { NavLink } from "react-router"
 import { cn } from "~/lib/utils"
 import { Button } from "../components/ui/button"
 import {
@@ -16,51 +17,60 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
-        <CardHeader>
-          <CardTitle>Login to your account</CardTitle>
-          <CardDescription>
+      <Card className="border-2 border-gray-100 shadow-lg">
+        <CardHeader className="border-b border-gray-100 pb-6">
+          <CardTitle className="text-2xl font-bold text-[#000000]">Login to your account</CardTitle>
+          <CardDescription className="text-gray-600">
             Enter your email below to login to your account
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="pt-6">
           <form>
             <div className="flex flex-col gap-6">
               <div className="grid gap-3">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email" className="font-medium text-gray-700">Email</Label>
                 <Input
                   id="email"
                   type="email"
                   placeholder="m@example.com"
                   required
+                  className="border-gray-300 focus:border-[#0044B1] focus:ring-[#0044B1]"
                 />
               </div>
               <div className="grid gap-3">
                 <div className="flex items-center">
-                  <Label htmlFor="password">Password</Label>
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                  <Label htmlFor="password" className="font-medium text-gray-700">Password</Label>
+                  <NavLink
+                    to="/forgot-password"
+                    className="ml-auto inline-block text-sm text-gray-600 underline-offset-4 hover:text-[#1EC773] hover:underline transition-colors duration-200"
                   >
                     Forgot your password?
-                  </a>
+                  </NavLink>
                 </div>
-                <Input id="password" type="password" required />
+                <Input 
+                  id="password" 
+                  type="password" 
+                  required 
+                  className="border-gray-300 focus:border-[#0044B1] focus:ring-[#0044B1]"
+                />
               </div>
               <div className="flex flex-col gap-3">
-                <Button type="submit" className="w-full">
+                <Button 
+                  type="submit" 
+                  className="w-full bg-[#111111] text-white hover:bg-[#0044B1] transition-colors duration-300"
+                >
                   Login
-                </Button>
-                <Button variant="outline" className="w-full">
-                  Login with Google
                 </Button>
               </div>
             </div>
-            <div className="mt-4 text-center text-sm">
+            <div className="mt-6 text-center text-sm text-gray-600">
               Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
+              <NavLink 
+                to="/signup" 
+                className="font-medium text-[#0044B1] underline-offset-4 hover:text-[#1EC773] hover:underline transition-colors duration-200"
+              >
                 Sign up
-              </a>
+              </NavLink>
             </div>
           </form>
         </CardContent>
