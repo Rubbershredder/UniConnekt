@@ -15,5 +15,9 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <h1>Hello, world!</h1>
+  return (
+    <main className="flex-1 pt-16 p-4 pb-20 sm:pb-4 w-full overflow-auto">
+    <h1>Home</h1>
+  </main>
+  )
 }
