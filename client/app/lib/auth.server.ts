@@ -1,4 +1,3 @@
-import { error } from "console";
 import { createCookieSessionStorage, redirect } from "react-router";
 
 const SESSION_SECRET = process.env.SESSION_SECRET || 'default_secret';

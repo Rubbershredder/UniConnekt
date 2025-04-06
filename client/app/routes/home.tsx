@@ -8,7 +8,7 @@ export function meta({}: Route.MetaArgs) {
     {
       tagName: "link",
       rel: "icon",
-      href: `/favicon.png`,
+      href: `/favicon.ico`,
       type: "image/png",
     }
   ];
