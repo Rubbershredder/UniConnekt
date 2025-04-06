@@ -1,4 +1,58 @@
+// routes/login.tsx
+import { redirect } from "react-router";
 import { LoginForm } from "~/components/login-form";
+import { createUserSession, getUserId, login } from "~/lib/auth.server";
+import type { ActionFunctionArgs, LoaderFunctionArgs, MetaFunction } from "react-router";
+
+export const meta: MetaFunction = () => {
+  return [{title: "Login"}];
+};
+
+export async function loader({request}: LoaderFunctionArgs) {
+  const userId = await getUserId(request);
+  if (userId) return redirect("/home");
+  return new Response(null, {status: 200});
+}
+
+export async function action({request}: ActionFunctionArgs) {
+  const formData = await request.formData();
+  const email = formData.get("email");
+  const password = formData.get("password");
+  const redirectTo = formData.get("redirectTo") || "/home";
+
+  if(!email || typeof email !== "string" || !password || typeof password !== "string"){
+    return new Response(
+      JSON.stringify({error: "Invalid Form Data"}), 
+      {
+        status: 400,
+        headers: { "Content-Type": "application/json" }
+      }
+    );
+  }
+  
+  const {error, user} = await login({email, password});
+  if (error) {
+    return new Response(
+      JSON.stringify({error}),
+      {
+        status: 401,
+        headers: { "Content-Type": "application/json" }
+      }
+    );
+  }
+  
+  if (!user || !user.ID) {
+    return new Response(
+      JSON.stringify({error: "User not found"}),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" }
+      }
+    );
+  }
+  
+  return createUserSession(user.ID.toString(), redirectTo.toString());
+}
 
 export default function Page() {
   return (
