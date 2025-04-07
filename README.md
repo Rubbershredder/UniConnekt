@@ -1,3 +1,11 @@
+# Instruction
+
+to run the frontend => cd client/ => npm i => npm run dev (using react-router v7 framework + tailwindcss + shadcn ui)
+before u run the backend i need u guys to install go lang go official website and then u need to install CompileDaemon => go install github.com/githubnemo/CompileDaemon@latest
+to run the backend => cd backend/GoGin/ => go build -o GoGin main.go => CompileDaemon -command="./GoGin"
+
+any issues do let me know
+
 need to work on the following next  
 Role-Based Access Control (RBAC) Implementation Guide
 
