@@ -8,7 +8,7 @@ import { Label } from "../components/ui/label";
 export function LoginForm() {
   const actionData = useActionData() as {error?: string};
   const [searchParams] = useSearchParams();
-  const redirectTo = searchParams.get("redirectTo") || "/home";
+  const redirectTo = searchParams.get("redirectTo") || "/";
 
   return (
     <div className="flex flex-col gap-6">
@@ -54,7 +54,7 @@ export function LoginForm() {
                   className="border-gray-300 focus:border-[#0044B1] focus:ring-[#0044B1]"
                 />
               </div>
-              {redirectTo !== "/home" ? (
+              {redirectTo !== "/" ? (
                 <input type="hidden" name="redirectTo" value={redirectTo} />
               ) : null}
               <div className="flex flex-col gap-3">

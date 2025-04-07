@@ -118,3 +118,14 @@ func Validate(ctx *gin.Context) {
 		"message": user,
 	})
 }
+
+func Logout(ctx *gin.Context) {
+	// setsamesite is used to prevent the cookie from being sent to other domains
+	ctx.SetSameSite(http.SameSiteLaxMode)
+	// setcookie with authorization set to empty string by setting expiry to -1
+	ctx.SetCookie("Authorization", "", -1, "", "", false, true)
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "Successfully logged out",
+	})
+}

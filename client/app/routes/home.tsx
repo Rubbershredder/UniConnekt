@@ -1,5 +1,7 @@
-import { href } from "react-router";
+import { redirect, type LoaderFunctionArgs } from "react-router";
 import type { Route } from "./+types/home";
+import Navbar from "~/components/navbar";
+import { getUserId } from "~/lib/auth.server";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -14,10 +16,23 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export async function loader({request}: LoaderFunctionArgs) {
+  const userId = await getUserId(request);
+  // If no user, redirect to login
+  if (!userId) {
+    return redirect("/login");
+  }
+  // Return the userId so it's available to the component
+  return { userId };
+}
+
 export default function Home() {
   return (
-    <main className="flex-1 pt-16 p-4 pb-20 sm:pb-4 w-full overflow-auto">
-    <h1>Home</h1>
-  </main>
-  )
+    <div>
+      <Navbar/>
+      <main>
+        <h1>Home</h1>
+      </main>
+    </div>
+  );
 }

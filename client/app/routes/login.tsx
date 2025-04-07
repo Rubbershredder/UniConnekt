@@ -10,15 +10,15 @@ export const meta: MetaFunction = () => {
 
 export async function loader({request}: LoaderFunctionArgs) {
   const userId = await getUserId(request);
-  if (userId) return redirect("/home");
-  return new Response(null, {status: 200});
+  if (userId) return redirect("/");
+  return null;  // Return null instead of empty response
 }
 
 export async function action({request}: ActionFunctionArgs) {
   const formData = await request.formData();
   const email = formData.get("email");
   const password = formData.get("password");
-  const redirectTo = formData.get("redirectTo") || "/home";
+  const redirectTo = formData.get("redirectTo") || "/";
 
   if(!email || typeof email !== "string" || !password || typeof password !== "string"){
     return new Response(
@@ -51,6 +51,7 @@ export async function action({request}: ActionFunctionArgs) {
     );
   }
   
+  // Redirect to home page after successful login
   return createUserSession(user.ID.toString(), redirectTo.toString());
 }
 
@@ -58,7 +59,7 @@ export default function Page() {
   return (
     <div className="flex min-h-svh flex-col items-center">
       <div className="mt-8 mb-2">
-        <img src="/favicon.png" alt="UniConneKt Logo" className="h-80 w-auto" />
+        <img src="/favicon.png" alt="UniConneKt Logo" className="h-60 w-auto" />
       </div>
       <div className="w-full max-w-sm px-6">
         <LoginForm />

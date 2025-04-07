@@ -1,3 +1,4 @@
+import { error } from "console";
 import { createCookieSessionStorage, redirect } from "react-router";
 
 const SESSION_SECRET = process.env.SESSION_SECRET || 'default_secret';
@@ -16,7 +17,7 @@ const sessionStorage = createCookieSessionStorage({
 
 // This function gets the cookie form the session 
 export async function getUserSession(request: Request){
-    return sessionStorage.getSession(request.headers.get("Cookies"))
+    return sessionStorage.getSession(request.headers.get("Cookie"))
 }
 
 // This function gets the user id from the session
@@ -68,7 +69,7 @@ export async function login ({email , password,}:{ email:string, password: strin
     }
 
     const userData = await validateResponse.json()
-    return {user: userData.message}
+    return {user: userData.message, error : null}
 }
 
 // This function signs up the user
@@ -101,14 +102,24 @@ export async function createUserSession( userId:string, redirectTo: string){
 // This function logs out the user
 export async function logout(request: Request){
     const session = await getUserSession(request)
-    await fetch("http://localhost:3000/logout", {
-        method: "POST",
-        credentials: "include", // this is used to include the cookie in the request
-    })
+    try {
+        const response = await fetch("http://localhost:3000/logout", {
+            method: "POST",
+            credentials: "include",
+        })
+        
+        if (!response.ok) {
+            console.error("Backend logout failed:", await response.text());
+            // Still proceed with local logout even if backend fails
+        }
+    } catch (error) {
+        console.error("Error during logout:", error);
+        // Still proceed with local logout even if request fails
+    }
 
     return redirect("/login", {
         headers:{
-            "Set-Cookie": await sessionStorage.destroySession(session), // this is used to destroy the session
+            "Set-Cookie": await sessionStorage.destroySession(session),
         }
     })
 }
