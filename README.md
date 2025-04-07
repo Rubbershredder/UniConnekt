@@ -1,10 +1,115 @@
-# Instruction
+# Application Setup and Running Instructions
 
-to run the frontend => cd client/ => npm i => npm run dev (using react-router v7 framework + tailwindcss + shadcn ui)
-before u run the backend i need u guys to install go lang go official website and then u need to install CompileDaemon => go install github.com/githubnemo/CompileDaemon@latest
-to run the backend => cd backend/GoGin/ => go build -o GoGin main.go => CompileDaemon -command="./GoGin"
+This document provides instructions for setting up and running both the frontend and backend components of the application.
 
-any issues do let me know
+## Prerequisites
+
+Before getting started, make sure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (v16 or later recommended)
+- [Go](https://golang.org/dl/) (v1.18 or later)
+- Git
+
+## Frontend Setup
+
+The frontend is built with React Router v7, TailwindCSS, and ShadcnUI.
+
+### Steps to run the frontend:
+
+1. Navigate to the client directory:
+   ```bash
+   cd client/
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm i
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. The frontend application should now be running at `http://localhost:5173` (or another port if 5173 is in use)
+
+## Backend Setup
+
+The backend is built with Go and the Gin framework.
+
+### Steps to run the backend:
+
+1. Install CompileDaemon (a tool for auto-reloading during development):
+   ```bash
+   go install github.com/githubnemo/CompileDaemon@latest
+   ```
+
+   > **Note:** Make sure your Go bin directory is in your PATH environment variable.
+   > - On Windows, this is typically `%USERPROFILE%\go\bin`
+   > - On Linux/macOS, this is typically `$HOME/go/bin`
+
+2. Navigate to the backend directory:
+   ```bash
+   cd backend/GoGin/
+   ```
+
+3. Build the application:
+   ```bash
+   go build -o GoGin main.go
+   ```
+
+4. Run the application with CompileDaemon for hot-reloading:
+   ```bash
+   CompileDaemon -command="./GoGin"
+   ```
+
+5. The backend API should now be running at `http://localhost:8080` (or the port specified in your configuration)
+
+## Environment Variables
+
+Make sure you have the correct environment variables set up:
+
+- For the backend, create a `.env` file in the `backend/GoGin/` directory with the following variables:
+  ```
+  PORT=3000
+  SECRET=your_jwt_secret_key
+  "host=localhost user=postgres password=postgres dbname=userData port=5432 sslmode=disable"
+  ```
+
+- For the frontend, create a `.env` file in the `client/` directory if required by your configuration.
+
+## Troubleshooting
+
+If you encounter any issues:
+
+### Frontend Issues
+
+- Make sure Node.js is properly installed
+- Check that all dependencies are installed correctly
+- Clear your browser cache or try a different browser
+
+### Backend Issues
+
+- Ensure Go is properly installed and in your PATH
+- Make sure CompileDaemon is correctly installed
+- Check that your database is running and accessible
+- Verify that all required environment variables are set
+
+If you're still experiencing issues, try running the Go application directly without CompileDaemon:
+```bash
+go run main.go
+```
+
+## Additional Resources
+
+- [React Router Documentation](https://reactrouter.com/)
+- [TailwindCSS Documentation](https://tailwindcss.com/docs)
+- [ShadcnUI Documentation](https://ui.shadcn.com/)
+- [Go Documentation](https://golang.org/doc/)
+- [Gin Framework Documentation](https://gin-gonic.com/docs/)
+
+For any persistent issues, please open an issue in the repository or contact the development team.
+OR reach out to me 
 
 need to work on the following next  
 Role-Based Access Control (RBAC) Implementation Guide
