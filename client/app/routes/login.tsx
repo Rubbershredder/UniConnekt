@@ -60,7 +60,7 @@ export default function Page() {
     <div className="flex h-screen flex-col items-center justify-center overflow-hidden">
       <div className="flex flex-col items-center max-h-screen">
         <div className="mb-2">
-          <img src="/favicon.png" alt="UniConneKt Logo" className="h-60 w-auto" />
+          <img src="/favicon.png" alt="UniConneKt Logo" className="h-30 w-auto" />
         </div>
         <div className="w-full max-w-sm px-6">
           <LoginForm />
