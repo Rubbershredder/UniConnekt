@@ -2,14 +2,6 @@
 
 This document provides instructions for setting up and running both the frontend and backend components of the application.
 
-## Prerequisites
-
-Before getting started, make sure you have the following installed:
-
-- [Node.js](https://nodejs.org/) (v16 or later recommended)
-- [Go](https://golang.org/dl/) (v1.18 or later)
-- Git
-
 ## Frontend Setup
 
 The frontend is built with React Router v7, TailwindCSS, and ShadcnUI.
