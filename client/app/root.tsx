@@ -44,7 +44,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   return (
-    <main className="flex-1 pt-16 p-4 pb-20 sm:pb-4 w-full overflow-auto">
+    <main>
       <Outlet />
     </main>
   );
