@@ -47,12 +47,14 @@ export async function action({ request }: ActionFunctionArgs) {
 
 export default function Page() {
   return (
-    <div className="flex min-h-svh flex-col items-center">
-      <div className="mt-8 mb-2">
-        <img src="/favicon.png" alt="UniConneKt Logo" className="h-60 w-auto" />
-      </div>
-      <div className="w-full max-w-sm px-6">
-        <SignupForm />
+    <div className="flex h-screen flex-col items-center justify-center overflow-hidden">
+      <div className="flex flex-col items-center max-h-screen">
+        <div className="mb-2">
+          <img src="/favicon.png" alt="UniConneKt Logo" className="h-30 w-auto" />
+        </div>
+        <div className="w-screen max-w-sm px-6">
+          <SignupForm />
+        </div>
       </div>
     </div>
   );

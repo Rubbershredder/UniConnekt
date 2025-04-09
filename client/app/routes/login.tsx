@@ -62,7 +62,7 @@ export default function Page() {
         <div className="mb-2">
           <img src="/favicon.png" alt="UniConneKt Logo" className="h-30 w-auto" />
         </div>
-        <div className="w-full max-w-sm px-6">
+        <div className="w-screen max-w-sm px-6">
           <LoginForm />
         </div>
       </div>
